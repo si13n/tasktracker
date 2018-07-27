@@ -26,8 +26,8 @@
         </div>
 
       </div>
-      <div class="right menu">
 
+      <div class="right menu">  
         <% if current_user.name? %>
           <%= link_to current_user.name,edit_user_registration_path, class: "item" %>
             <% else %>
