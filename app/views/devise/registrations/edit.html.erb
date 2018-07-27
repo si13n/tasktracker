@@ -1,16 +1,21 @@
 <div class="ui container">
-  <h1><% if current_user.name? %>
-  <%= current_user.name%>
+<br>
+  <h1>
+  <% if current_user.name? %>
+  <%= current_user.name %>
 <% else %>
-  <%= current_user.email%>
-  <% end %></h1>
+  <%= current_user.email %>
+  <% end %>
+  </h1>
 
 <p><a href=#>View my profile as others see it</a></p>
 <div class="ui form">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-  
-  <%= image_tag current_user.avatar %>
+
+  <% if current_user.avatar.attached? %>
+    <%= image_tag current_user.avatar %>
+  <% end %>
 <p>
       <div class="ui left icon disabled input">
         <%= f.email_field :email, placeholder: 'Enter you email'  %>

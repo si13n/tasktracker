@@ -15,6 +15,7 @@
       <a class="item" href=<%=root_path %>>Home</a>
       <a class="item">My Dashboard</a>
       <a class="item">BurnDown</a>
+      <a class="item" href=<%=users_path %>>Users</a>
       <% if current_user.is_admin? %>
         <a class="item">Admin</a>
       <% end %>
