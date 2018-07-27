@@ -7,7 +7,13 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :role, :email])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :role, :email, :avatar])
   end
 
+  private
+  def init_attachment
+    if current_user.update
+      current_user.avatar.attach(params[:avatar])
+    end
+  end
 end
