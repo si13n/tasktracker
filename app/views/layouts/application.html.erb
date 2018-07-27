@@ -10,29 +10,35 @@
 </head>
 
 <body>
+  <% if user_signed_in? %>
+    <div class="ui attached stackable menu">
+      <a class="item" href=<%=root_path %>>Home</a>
+      <a class="item">My Dashboard</a>
+      <a class="item">BurnDown</a>
+      <% if current_user.is_admin? %>
+        <a class="item">Admin</a>
+      <% end %>
+      <div class="item ">
 
-<div class="ui attached stackable menu">
-  <div class="item">
-    <i class="large rocket red icon"></i>
-  </div>
-  <a class="item">Home</a>
-  <a class="item">My Dashboard</a>
-  <a class="item">BurnDown</a>
-  <a class="item">Admin</a>
-  <div class="item ">
+        <div class="ui action input">
+          <input type="text" placeholder="Search...">
+          <div class="ui primary button">Search</div>
+        </div>
 
-<div class="ui action input">
-  <input type="text" placeholder="Search...">
-  <div class="ui primary button">Search</div>
-</div>
+      </div>
+      <div class="right menu">
 
-  </div>
-  <div class="right menu">
-    <a class="item">Serhii Domin</a>
-    <a class="item">Sign Out</a>
-  </div>
-</div>
-    <%= yield %>
+        <% if current_user.name? %>
+          <%= link_to current_user.name,edit_user_registration_path, class: "item" %>
+            <% else %>
+              <%= link_to current_user.email,edit_user_registration_path, class: "item"  %>
+                <% end %>
+                  <%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "item" %>
+
+      </div>
+    </div>
+    <% end %>
+      <%= yield %>
 
 </body>
 

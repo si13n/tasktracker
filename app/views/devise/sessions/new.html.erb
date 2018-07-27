@@ -1,0 +1,90 @@
+<style type="text/css">
+    body {
+      background-color: #FFFFFF;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your e-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : 'Please enter a valid e-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+  </script>
+
+  <div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui blue image header">
+      <i class="sign in icon"></i>
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="ui segment">
+    <div class="ui left icon large input">
+      <%= f.email_field :email, autofocus: true, placeholder: 'Enter you email'  %>
+      <i class="mail icon"></i>
+    </div>
+    <p>
+    <div class="ui left icon large input">
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+    <i class="privacy icon"></i>
+    </div>
+    <p>
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+      <p>
+      <div class="actions">
+        <%= f.submit "Log in", class: 'ui primary large button' %>
+      </div>
+<% end %>
+</div>
+    <div class="ui message">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

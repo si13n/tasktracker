@@ -1,0 +1,65 @@
+<div class="ui container">
+  <h1><% if current_user.name? %>
+  <%= current_user.name%>
+<% else %>
+  <%= current_user.email%>
+  <% end %></h1>
+
+<p><a href=#>View my profile as others see it</a></p>
+<div class="ui form">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+  Avatar
+<p>
+      <div class="ui left icon disabled input">
+        <%= f.email_field :email, placeholder: 'Enter you email'  %>
+        <i class="mail icon"></i>
+    </div>&emsp;<i class="warning sign icon"></i><i>Email can't be changed</i>
+<p>
+    <div class="ui left icon input">
+    <%= f.text_field :name, autofocus: true, placeholder: 'Name'  %>
+    <i class="user icon"></i>
+  </div>
+
+  <div class="ui input">
+    <%= f.select :role, options_for_select(["Tester", "Developer", "BA", "TST Manager", "DEV Manager" ], f.object.role)%>
+  </div>
+  </div>
+<p>
+  <div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+<p><p>
+ <i>Leave blank if you don't want to change password:</i>
+ <p>
+    <div class="ui left icon input">
+  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'New Password' %>
+  <i class="privacy icon"></i>
+</div>
+
+<div class="ui left icon input">
+<%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm new Password' %>
+<i class="privacy icon"></i>
+</div>
+<p>
+  <p><i>(we need your current password to confirm your changes)</i>
+  <div class="ui left icon input">
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: 'Current password' %>
+    <i class="privacy icon"></i>
+  </div>
+<p>
+<p>
+  <i class="photo icon"></i>Change avatar:
+          <%= f.file_field :avatar%>
+    <p>
+  <div class="actions">
+    <%= f.submit "Update", class: 'ui primary button' %><%= link_to "Back", root_path, class: 'ui button' %>
+  </div>
+<% end %>
+<div class="ui divider"></div>
+
+<br>
+</div>
+</div>
