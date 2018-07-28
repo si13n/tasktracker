@@ -3,5 +3,9 @@ Rails.application.routes.draw do
   root 'tasks#index'
 
   resources :tasks
-  resources :users
+  resources :users  do
+    member do
+      delete :delete_avatar
+    end
+  end
 end

@@ -13,7 +13,8 @@ gem 'semantic-ui-sass'
 gem 'turbolinks', '~> 5.1.0'
 gem 'jquery-rails'
 gem 'devise'
-gem "activestorage"
+gem 'activestorage'
+gem 'mini_magick'
 
 group :production do
   gem 'pg'
