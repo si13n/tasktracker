@@ -28,7 +28,13 @@
 
       </div>
 
-      <div class="right menu">  
+      <div class="right menu">
+      <div class="item ">
+      <button class="ui labeled green icon button">
+        <i class="plus icon"></i>
+        New task
+      </button>
+      </div>  
         <% if current_user.name? %>
           <%= link_to current_user.name,edit_user_registration_path, class: "item" %>
             <% else %>

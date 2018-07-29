@@ -1,3 +1,44 @@
+<div class="padding_container">
 <% @users.each do |user| %>
-<%= user.name %>
-<% end %>
+
+    <% end %>
+
+
+        <div class="ui six fluid cards">
+            <% @users.each do |user| %>
+                <div class="ui card">
+                    <div class="image">
+                    <a class="ui green right ribbon label">Online</a>
+                        <%= image_tag user.avatar %>
+                    </div>
+                    <div class="content">
+
+                        <a class="header">
+                            <% if user.name?%>
+                                <%= user.name %>
+                        </a>
+                        <% end %>
+                            <div class="meta">
+                                <span class="date">
+                                    <%= user.email %>
+                                </span>
+                            </div>
+                        <p>
+                    <div class="right floated">
+                        <% if user.team_id? %>
+                         <%= Team.find(user.team_id).name %>
+                         <% end %>
+                    </div>
+                    <%= user.role%>
+
+                    </div>
+                    <div class="extra content">
+                        <a>
+                        <i class="user icon"></i>
+                        Online: two minutes ago
+                        </a>
+                    </div>
+                </div>
+                <% end %>
+        </div>
+</div>
