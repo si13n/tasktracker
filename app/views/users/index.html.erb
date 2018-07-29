@@ -8,7 +8,7 @@
             <% @users.each do |user| %>
                 <div class="ui card">
                     <div class="image">
-                    <a class="ui green right ribbon label">Online</a>
+                    <span class="ui green right ribbon label">Online</span>
                         <%= image_tag user.avatar %>
                     </div>
                     <div class="content">
@@ -33,10 +33,10 @@
 
                     </div>
                     <div class="extra content">
-                        <a>
+                        <span>
                         <i class="user icon"></i>
                         Online: two minutes ago
-                        </a>
+                        </span>
                     </div>
                 </div>
                 <% end %>
