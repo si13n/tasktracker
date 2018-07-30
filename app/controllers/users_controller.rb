@@ -3,6 +3,9 @@ class UsersController < ApplicationController
     
     def index
         @users = User.where(nil)
+        params[:role] = nil if params[:role] == "All roles"
+        params[:team] = nil if params[:team] == "All teams"
+        params[:active] == nil ? params[:active] = "t" : params[:active] = nil
         @users = @users.search(params)
         @team_names = Team.all.collect {|team| [ team.name, team.id ] }
         @team_names.unshift(nil)

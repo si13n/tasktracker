@@ -9,13 +9,13 @@ class User < ApplicationRecord
   #cope :email, -> (email) { where("email LIKE ?", "#{email}%")}
   #scope :names, -> (name) { where("name LIKE ?", "%#{name}%")}
   #scope :recent, lambda { :conditions => ['updated_at > ? AND admin != ?', 5.minutes.ago, true] }
-
+#  where("task_sum LIKE ? OR id LIKE ?", "%#{search}%", "%#{search}%")
   scope :search, -> (params) do
         where("email LIKE ?", "%#{params[:email]}%").
         where("name LIKE ?", "#{params[:name]}%").
         where("role LIKE ?", "#{params[:role]}%").
-        where(team_id: params[:team]).
-        where(active: true)
+        where("team_id LIKE ?", "#{params[:team]}%").
+        where("active LIKE ?", "#{params[:active]}%")
   end
 
   def online?
