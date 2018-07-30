@@ -2,7 +2,7 @@
 
     <%= form_tag users_path, :method => 'get' do |f| %>
         <div class="ui form">
-            <div class="eight fields">
+            <div class="ten fields">
                 <div class="field">
                     <div class="ui input">
                         <%= text_field_tag :email, params[:email], autofocus: true, placeholder: 'Email'  %>
@@ -15,12 +15,12 @@
                 </div>
                    <div class="field">
                     <div class="ui fluid input">
-                        <%= select_tag :role, options_for_select([nil, "Tester", "Developer", "BA", "TST Manager", "DEV Manager" ])%>
+                        <%= select_tag :role, options_for_select(User.roles), :include_blank => "Select role..."%>
                     </div>
                 </div>
                                 <div class="field">
                     <div class="ui fluid input">
-                        <%= select_tag :team, options_for_select(@team_names) %>
+                        <%= select_tag :team, options_for_select(@team_names), :include_blank => "Select team..." %>
                     </div>
                 </div>
                 <div class="inline field vertical_align">
@@ -31,7 +31,7 @@
                 </div>
                 </div>
                 <div class="actions">
-                    <%= submit_tag "Filter", class: 'ui primary button' %>
+                    <%= submit_tag "Filter users", class: 'ui primary button' %>
                 </div>
             </div>
         </div>

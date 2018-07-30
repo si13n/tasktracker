@@ -6,10 +6,10 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  #cope :email, -> (email) { where("email LIKE ?", "#{email}%")}
-  #scope :names, -> (name) { where("name LIKE ?", "%#{name}%")}
-  #scope :recent, lambda { :conditions => ['updated_at > ? AND admin != ?', 5.minutes.ago, true] }
-#  where("task_sum LIKE ? OR id LIKE ?", "%#{search}%", "%#{search}%")
+ def self.roles
+  ["Tester", "Developer", "BA", "TST Manager", "DEV Manager"]
+ end
+
   scope :search, -> (params) do
         where("email LIKE ?", "%#{params[:email]}%").
         where("name LIKE ?", "#{params[:name]}%").

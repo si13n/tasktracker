@@ -53,13 +53,13 @@
                 <div class="field">
                   <label>Role:</label>
                   <div class="ui fluid input">
-                    <%= f.select :role, options_for_select(["Tester", "Developer", "BA", "TST Manager", "DEV Manager" ], f.object.role)%>
+                    <%= f.select :role, options_for_select(User.roles, f.object.role), :include_blank => "Select role..."%>
                   </div>
                 </div>
                 <div class="field">
                   <label>Team:</label>
                   <div class="ui fluid input">
-                     <%= f.select :team_id, Team.all.collect{|team| [team.name, team.id]}%>
+                     <%= f.select :team_id, Team.all.collect{|team| [team.name, team.id]}, :include_blank => "Select team..."%>
                   </div>
                 </div>
               </div>
