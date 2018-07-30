@@ -1,38 +1,37 @@
 <div class="padding_container">
 
-    <%= form_for(users_path) do |f| %>
+    <%= form_tag users_path, :method => 'get' do |f| %>
         <div class="ui form">
             <div class="eight fields">
                 <div class="field">
                     <div class="ui input">
-                        <%= f.text_field :email, autofocus: true, placeholder: 'Email'  %>
+                        <%= text_field_tag :email, params[:email], autofocus: true, placeholder: 'Email'  %>
                     </div>
                 </div>
-         <div class="field">
+                 <div class="field">
                     <div class="ui input">
-                        <%= f.text_field :name, placeholder: 'Name'  %>
+                        <%= text_field_tag :name, params[:name], placeholder: 'Name'  %>
                     </div>
                 </div>
-                <div class="field">
+                   <div class="field">
                     <div class="ui fluid input">
-                        <%= f.select :role, options_for_select(["All roles", "Tester", "Developer", "BA", "TST Manager", "DEV Manager" ])%>
+                        <%= select_tag :role, options_for_select([nil, "Tester", "Developer", "BA", "TST Manager", "DEV Manager" ])%>
                     </div>
                 </div>
-                <div class="field">
+                                <div class="field">
                     <div class="ui fluid input">
-                        <%= f.select :team_id, options_for_select(@team_names) %>
+                        <%= select_tag :team, options_for_select(@team_names) %>
                     </div>
                 </div>
-
-<div class="inline field vertical_align">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden">
-      <label>Display not active users</label>
-    </div>
-      </div>
-
+                <div class="inline field vertical_align">
+                <div class="ui checkbox">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <%= check_box_tag :active %>
+                <label>Display not active users</label>
+                </div>
+                </div>
                 <div class="actions">
-                    <%= f.submit "Filter", class: 'ui primary button' %>
+                    <%= submit_tag "Filter", class: 'ui primary button' %>
                 </div>
             </div>
         </div>
