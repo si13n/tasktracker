@@ -5,7 +5,9 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <% if current_user.avatar.attached? %>
           <%= link_to image_tag(current_user.avatar, class: 'avatar'), current_user.avatar %>
-            <% end %>
+          <% else %>
+                          <%= image_tag("user_placeholder.png") %>
+                        <% end %>
             <p> <p>
                   <label class="ui primary basic button">
                     <i class="photo icon"></i>
@@ -27,13 +29,12 @@
           <% if current_user.name? %>
             <%= current_user.name %>
               <% end %>
-              <div class="ui green small label">Online</div>
                 <div class="sub header">
                   <i class="mail icon"></i>
                   <%= current_user.email %>
                 </div>
         </h2>
-        <a href=#>View my profile as others see it</a>
+        <a href= <%=user_path(current_user) %> >View my profile as others see it</a>
       </p>
       <div class="ui form">
 

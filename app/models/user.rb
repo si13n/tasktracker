@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one_attached :avatar
+
+  def online?
+    self.updated_at > 10.minutes.ago
+  end
+
 end
