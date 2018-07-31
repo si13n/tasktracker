@@ -1,5 +1,5 @@
 <div class="padding_container">
-
+<% if Task.count > 0 %>
 <table class="ui compact sortable striped selectable celled table">
   <thead class="ui inverted blue table">
     <tr>
@@ -32,7 +32,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 </div>
 
 <script>

@@ -16,7 +16,6 @@
       <a class="item">Dashboard</a>
       <a class="item">Burndown</a>
       <a class="item" href=<%=users_path %>>Users</a>
-      <a class="item">Admin</a>
       <% if current_user.is_admin? %>
         <a class="item">Admin</a>
       <% end %>
