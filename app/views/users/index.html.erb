@@ -1,5 +1,4 @@
 <div class="padding_container">
-
     <%= form_tag users_path, :method => 'get' do |f| %>
         <div class="ui form">
             <div class="five fields">
@@ -36,72 +35,60 @@
             </div>
         </div>
         <% end %>
-
             <br>
-                    <div class="ui eight fluid cards">
-                        <% @users.each do |user| %>
-                            <div class="ui card">
-                                <a class="image" href=<%=user_path(user) %> >
-                                    <% if user.online? %>
-                                        <span class="ui green right ribbon label">Online</span>
-                                        <% else %>
-                                            <span class="ui red right ribbon label">Offline</span>
-                                            <% end %>
-                                                <% if user.avatar.attached? %>
-                                                    <%= image_tag user.avatar %>
-                                                        <% else %>
-                                                            <%= image_tag("user_placeholder.png") %>
-                                                                <% end %>
-                                </a>
-                                <div class="content">
+        <div class="ui eight fluid cards">
+        <% @users.each do |user| %>
+            <div class="ui card">
+                <a class="image" href=<%=user_path(user) %> >
+                    <% if user.avatar.attached? %>
+                    <%= image_tag user.avatar %>
+                    <% else %>
+                    <%= image_tag("user_placeholder.png") %>
+                    <% end %>
+                </a>
+                <div class="content">
 
-                                    <a class="header" href=<%=user_path(user) %> >
-                                        <% if user.name?%>
-                                            <%= user.name %>
-                                                <% end %>
-                                                    <div class="meta">
-                                                        <span class="date">
-                                                            <%= user.email %>
-                                                        </span>
-                                                    </div>
-                                    </a>
-                                    <p>
-                                        <div class="right floated">
-                                            <% if user.team_id? %>
-                                                <%= Team.find(user.team_id).name %>
-                                                    <% end %>
-                                        </div>
-                                        <%= user.role%>
-                                </div>
-                                <div class="extra content">
-                                    <span>
-                                        <i class="history icon"></i>
-                                        Online:
-                                        <%= time_ago_in_words(user.updated_at) %> ago.
-                                    </span>
-                                </div>
-                            </div>
-                            <% end %>
+                    <a class="header" href=<%=user_path(user) %> >
+                    <% if user.online? %>
+                        <a class="ui green empty circular label"></a>
+                    <% else %>
+                        <a class="ui red empty circular label"></a>
+                    <% end %>
+                    <% if user.name?%>
+                        <%= user.name %>
+                    <% end %>
+                    <div class="meta">
+                        <span class="date">
+                            <%= user.email %>
+                        </span>
                     </div>
+                    </a>
+                    <p>
+                        <div class="right floated">
+                            <% if user.team_id? %>
+                                <%= Team.find(user.team_id).name %>
+                                    <% end %>
+                        </div>
+                        <%= user.role%>
+                </div>
+                <div class="extra content">
+                    <span>
+                        <i class="history icon"></i>
+                        Online:
+                        <%= time_ago_in_words(user.updated_at) %> ago.
+                    </span>
+                </div>
+            </div>
+            <% end %>
+        </div>
 </div>
 
 <script>
-    $('.ui.checkbox')
-  .checkbox()
+    $('.ui.checkbox').checkbox();
+
+    $('.max.example .ui.normal.dropdown')
+  .dropdown({
+    maxSelections: 3
+  })
 ;
-    $(document).ready(function () {
-        var content = [
-            <% @users.each do |user| %> {
-                title: '<%= user.email %>'
-            },
-            <% end %>
-        ];
-
-        $('.ui.search')
-            .search({
-                type: 'standard',
-                source: content,
-            });
-
-    });
 </script>
