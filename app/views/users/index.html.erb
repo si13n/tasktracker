@@ -14,12 +14,12 @@
                 </div>
                    <div class="field">
                     <div class="ui fluid input">
-                        <%= select_tag :role, options_for_select(User.roles), :include_blank => "Select role..."%>
+                        <%= select_tag :role, options_for_select(User.roles), :include_blank => "Select role...", class: "ui fluid dropdown"%>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui fluid input">
-                        <%= select_tag :team, options_for_select(@team_names), :include_blank => "Select team..." %>
+                        <%= select_tag :team, options_for_select(@team_names), :include_blank => "Select team...", class: "ui fluid dropdown" %>
                     </div>
                 </div>
                 <div class="inline field vertical_align">
@@ -86,9 +86,8 @@
 <script>
     $('.ui.checkbox').checkbox();
 
-    $('.max.example .ui.normal.dropdown')
-  .dropdown({
-    maxSelections: 3
+    $('.ui.normal.dropdown').dropdown({
+        maxSelections: 5
   })
 ;
 </script>
