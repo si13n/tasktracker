@@ -15,8 +15,13 @@ class Task < ApplicationRecord
         where("project LIKE ?", "%#{params[:project]}%").
         where(
             if params[:status]
-                if params[:status].length  > 1
-                    "status LIKE '%#{params[:status].first}%' "
+                if params[:status].length == 2
+                    "status LIKE '%#{params[:status][0]}%' or
+                     status LIKE '%#{params[:status][1]}%'"
+                elsif params[:status].length == 3
+                   "status LIKE '%#{params[:status][0]}%' or
+                    status LIKE '%#{params[:status][1]}%' or
+                    status LIKE '%#{params[:status][2]}%'"
                 else
                     "status LIKE '%#{params[:status].first}%' "
                 end
