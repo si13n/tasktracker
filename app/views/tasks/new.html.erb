@@ -1,0 +1,16 @@
+<div class="ui container">
+    <br> 
+    <%= form_for(@task, :html => {:class => 'ui form'}) do |f| %>
+    <%= f.text_field :summary, placeholder: "Summary" %>
+    <%= f.text_field :description, placeholder: "Description" %>
+    <%= f.select :priority, options_for_select(Task.priority), :include_blank => "Select priority" %>
+    <%= f.number_field :tst_est, placeholder: "Testing Estimate" %>
+    <%= f.number_field :dev_est, placeholder: "Development Estimate" %>
+    <%= f.select :tst, options_for_select(User.all.collect{|u| [u.name, u.id]}), :include_blank => "Select tester" %>
+    <%= f.select :dev, options_for_select(User.all.collect{|u| [u.name, u.id]}), :include_blank => "Select developer"  %>
+    <%= f.hidden_field :created_by, value: current_user.id %>
+    <%= f.hidden_field :status, value: "New" %>
+    <%= f.select :project, options_for_select(Project.all.collect{|u| [u.name, u.id]}), :include_blank => "Select project"  %>
+    <%= f.submit "Save", class: "ui green button" %>
+    <% end %>
+</div>

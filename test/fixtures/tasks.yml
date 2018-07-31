@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  summary: MyString
+  description: MyText
+  priority: MyString
+  tst: 1
+  dev: 1
+  tst_est: 1
+  dev_est: 1
+  created_by: 1
+
+two:
+  summary: MyString
+  description: MyText
+  priority: MyString
+  tst: 1
+  dev: 1
+  tst_est: 1
+  dev_est: 1
+  created_by: 1
