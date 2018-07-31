@@ -14,10 +14,12 @@ class Task < ApplicationRecord
     scope :tasks, -> (params) do
         where("project LIKE ?", "%#{params[:project]}%").
         where(
-            if params[:status] && params[:status].length  > 1
-                "status LIKE '%#{params[:status].first}%' "
-            else
-                "status LIKE '%#{params[:status].first}%' "
+            if params[:status]
+                if params[:status].length  > 1
+                    "status LIKE '%#{params[:status].first}%' "
+                else
+                    "status LIKE '%#{params[:status].first}%' "
+                end
             end
         ).
         where("priority LIKE ?", "%#{params[:priority]}%").
