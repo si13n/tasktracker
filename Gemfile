@@ -15,6 +15,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'activestorage'
 gem 'mini_magick'
+gem 'faker'
+gem 'kaminari'
 
 group :production do
   gem 'pg'

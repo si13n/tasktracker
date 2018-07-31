@@ -3,7 +3,10 @@ class TasksController < ApplicationController
     before_action :authenticate_user!
   
     def index
-       @tasks = Task.order('created_at DESC')
+       @tasks = Task.where(nil)
+       @tasks = Task.order('created_at DESC').page params[:page]
+       @tasks = @tasks.search(params)
+       @tasks = @tasks.tasks(params)
     end
 
     def show

@@ -18,7 +18,7 @@
                         <%= select_tag :role, options_for_select(User.roles), :include_blank => "Select role..."%>
                     </div>
                 </div>
-                                <div class="field">
+                <div class="field">
                     <div class="ui fluid input">
                         <%= select_tag :team, options_for_select(@team_names), :include_blank => "Select team..." %>
                     </div>
@@ -37,11 +37,7 @@
         </div>
         <% end %>
 
-
-
             <br>
-            <% @users.each do |user| %>
-                <% end %>
                     <div class="ui eight fluid cards">
                         <% @users.each do |user| %>
                             <div class="ui card">

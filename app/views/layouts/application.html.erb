@@ -4,9 +4,8 @@
 <head>
   <title>Task Tracker</title>
   <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
@@ -20,12 +19,16 @@
         <a class="item">Admin</a>
       <% end %>
       <div class="right menu">
-            <div class="item ">
-        <div class="ui action input">
-          <input type="text" placeholder="Search task...">
-          <div class="ui primary button">Search</div>
-        </div>
+
+      <div class="item">
+        <%= form_tag tasks_path, :method => 'get' do |f| %>
+          <div class="ui small input">
+            <%= text_field_tag :search, params[:search], autofocus: true, placeholder: 'id, summary or desc...'%>
+          </div>
+            <%= submit_tag "Search",  class: "ui primary button"%>
+          <% end %>
       </div>
+      
       <div class="item ">
       <a class="ui labeled green icon button" href=<%= new_task_path %>>
         <i class="plus icon"></i>

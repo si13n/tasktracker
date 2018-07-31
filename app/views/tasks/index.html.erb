@@ -1,26 +1,33 @@
 <div class="padding_container">
-<% if Task.count > 0 %>
+
+<%= render 'filter' %>
+
+<% if Task.all.count > 0 %>
 <table class="ui compact sortable striped selectable celled table">
   <thead class="ui inverted blue table">
     <tr>
-      <th class="sorted descending">id</th>
-      <th>Project</th>
-      <th>Summary</th>
-      <th>Priority</th>
+      <th class="sorted descending">ID</th>
+      <th>PROJECT</th>
+      <th>SUMMARY</th>
+      <th>COMMENT</th>
+      <th>TAGS</th>
+      <th>PRIORITY</th>
       <th>TST</th>
       <th>DEV</th>
       <th>TST_EST</th>
       <th>DEV_EST</th>
       <th>EST</th>
-      <th>Status</th>
+      <th>STATUS</th>
     </tr>
   </thead>
   <tbody>
-  <% Task.all.order(id: :desc).each do |t| %>
+  <% @tasks.each do |t| %>
     <tr>
-      <td><%= t.id %></td>
+      <td><%= link_to t.id.to_s, task_path(t)%></a></td>
       <td><%= Project.find(t.project).name unless t.project.nil? %></td>
-      <td><%= t.summary %></td>
+      <td><%= link_to t.summary, task_path(t) %></td>
+      <td>.</td>
+      <td>.</td>
       <td><%= t.priority %></td>
       <td><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></td>
       <td><%= User.find(t.dev).email[0,4] unless t.tst.nil? %></td>
@@ -33,6 +40,7 @@
   </tbody>
 </table>
 <% end %>
+<%= paginate @tasks %>
 </div>
 
 <script>
