@@ -1,0 +1,36 @@
+<%= form_tag users_path, :method => 'get' do |f| %>
+        <div class="ui form">
+            <div class="five fields">
+                <div class="field">
+                    <div class="ui input">
+                        <%= text_field_tag :email, params[:email], autofocus: true, placeholder: 'Email'  %>
+                    </div>
+                </div>
+                 <div class="field">
+                    <div class="ui input">
+                        <%= text_field_tag :name, params[:name], placeholder: 'Name'  %>
+                    </div>
+                </div>
+                   <div class="field">
+                    <div class="ui fluid input">
+                        <%= select_tag :role, options_for_select(User.roles, params[:role]), :include_blank => "Select role...", class: "ui fluid dropdown"%>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui fluid input">
+                        <%= select_tag :team, options_for_select(@team_names, params[:team]), :include_blank => "Select team...", class: "ui fluid dropdown" %>
+                    </div>
+                </div>
+                <div class="inline field vertical_align">
+                <div class="ui checkbox">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <%= check_box_tag :active %>
+                <label>Display not active users</label>
+                </div>
+                </div>
+                <div class="actions">
+                    <%= submit_tag "Filter users", class: 'ui primary button' %>
+                </div>
+            </div>
+        </div>
+        <% end %>

@@ -1,0 +1,103 @@
+<div class="padding_container">
+  <div class="ui grid">
+    <div class="ten wide column">
+    <p><%= @task.id %></p>
+    <p><%= @task.summary %></p>
+    <p><%= @task.description %></p>
+    <p><%= @task.priority %></p>
+    <p><%= @task.status %></p>
+    <p><%= Project.find(@task.project).name unless @task.project.nil? %></p>
+    <p><%= @task.dev %></p>
+    <p><%= @task.dev_est %></p>
+    <p><%= @task.tst %></p>
+    </div>
+    <div class="six wide column">
+
+<!-- Discussion -->
+
+        <div class="ui small comments">
+            <h3 class="ui dividing header">Discussion</h3>
+            <div class="comment">
+                <a class="avatar">
+                <%= image_tag("user_placeholder.png") %>
+                </a>
+                <div class="content">
+                <a class="author">Matt</a>
+                <div class="metadata">
+                    <span class="date">Today at 5:42PM</span>
+                </div>
+                <div class="text">
+                    How artistic!
+                </div>
+                <div class="actions">
+                    <a class="reply">Reply</a>
+                </div>
+                </div>
+            </div>
+            <div class="comment">
+                <a class="avatar">
+                <%= image_tag("user_placeholder.png") %>
+                </a>
+                <div class="content">
+                <a class="author">Elliot Fu</a>
+                <div class="metadata">
+                    <span class="date">Yesterday at 12:30AM</span>
+                </div>
+                <div class="text">
+                    <p>This has been very useful for my research. Thanks as well!</p>
+                </div>
+                <div class="actions">
+                    <a class="reply">Reply</a>
+                </div>
+                </div>
+                <div class="comments">
+                <div class="comment">
+                    <a class="avatar">
+                    <%= image_tag("user_placeholder.png") %>
+                    </a>
+                    <div class="content">
+                    <a class="author">Jenny Hess</a>
+                    <div class="metadata">
+                        <span class="date">Just now</span>
+                    </div>
+                    <div class="text">
+                        Elliot you are always so right :)
+                    </div>
+                    <div class="actions">
+                        <a class="reply">Reply</a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="comment">
+                <a class="avatar">
+                <%= image_tag("user_placeholder.png") %>
+                </a>
+                <div class="content">
+                <a class="author">Joe Henderson</a>
+                <div class="metadata">
+                    <span class="date">5 days ago</span>
+                </div>
+                <div class="text">
+                    Dude, this is awesome. Thanks so much
+                </div>
+                <div class="actions">
+                    <a class="reply">Reply</a>
+                </div>
+                </div>
+            </div>
+            <form class="ui reply form">
+                <div class="field">
+                <textarea></textarea>
+                </div>
+                <div class="ui blue labeled submit icon button">
+                <i class="icon edit"></i> Add Reply
+                </div>
+            </form>
+        </div>
+<!-- End of Comments -->
+
+    </div>
+  </div>
+</div>  

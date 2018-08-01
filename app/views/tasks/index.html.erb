@@ -9,8 +9,11 @@
       <th class="sorted descending">ID</th>
       <th>PROJECT</th>
       <th>SUMMARY</th>
-      <th>COMMENT</th>
-      <th>TAGS</th>
+      <th width="100pixels">TMS</th>
+      <th width="140pixels">ISSUE</th>
+      <th width="140pixels">CR</th>
+      <th width="10%">COMMENT</th>
+      <th width="7%">TAGS</th>
       <th>PRIORITY</th>
       <th>TST</th>
       <th>DEV</th>
@@ -23,11 +26,14 @@
   <tbody>
   <% @tasks.each do |t| %>
     <tr>
-      <td><%= link_to t.id.to_s, task_path(t)%></a></td>
+      <td><%= link_to t.id.to_s, edit_task_path(t)%></a></td>
       <td><%= Project.find(t.project).name unless t.project.nil? %></td>
-      <td><%= link_to t.summary, task_path(t) %></td>
-      <td>.</td>
-      <td>.</td>
+      <td><%= link_to t.summary, edit_task_path(t) %></td>
+      <td>TMHS-0945</td>
+      <td>ISS-GENE-45022IS</td>
+      <td>CR-GENE-43245IS</td>
+      <td>Will be fixed somehow</td>
+      <td>TBD, NREP</td>
       <td><%= t.priority %></td>
       <td><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></td>
       <td><%= User.find(t.dev).email[0,4] unless t.tst.nil? %></td>

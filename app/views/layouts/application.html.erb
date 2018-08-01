@@ -11,9 +11,14 @@
 <body>
   <% if user_signed_in? %>
     <div class="ui attached stackable menu">
-      <a class="item" href=<%=root_path %>>Home</a>
-      <a class="item">Dashboard</a>
-      <a class="item">Burndown</a>
+      <a class="item" href=<%=root_path %> >
+      <h3 class="ui header">
+        <i class="file alternate green icon"></i>
+        <div class="content"%>
+          Task Tracker
+        </div>
+      </h3>
+      </a>
       <a class="item" href=<%=users_path %>>Users</a>
       <% if current_user.is_admin? %>
         <a class="item">Admin</a>
