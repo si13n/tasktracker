@@ -28,7 +28,7 @@
     <tr>
       <td><%= link_to t.id.to_s, edit_task_path(t)%></a></td>
       <td><%= Project.find(t.project).name unless t.project.nil? %></td>
-      <td><%= link_to t.summary, edit_task_path(t) %></td>
+      <td><a class="summary" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.summary %> </a> </td>
       <td>TMHS-0945</td>
       <td>ISS-GENE-45022IS</td>
       <td>CR-GENE-43245IS</td>
@@ -37,10 +37,10 @@
       <td><%= t.priority %></td>
       <td><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></td>
       <td><%= User.find(t.dev).email[0,4] unless t.tst.nil? %></td>
-      <td><%= t.tst_est %></td>
-      <td><%= t.dev_est %></td>
+      <td><a class="tst_est" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.tst_est %></a></td>
+      <td><a class="dev_est" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.dev_est %></a></td>
       <td><%= t.dev_est.to_i + t.tst_est.to_i %></td>
-      <td><%= t.status %></td>
+      <td><a class="status" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.status %> </a> </td>
     </tr>
     <% end %>
   </tbody>
@@ -50,5 +50,33 @@
 </div>
 
 <script>
-$('table').tablesort()
+$('table').tablesort();
+
+$.fn.editable.defaults.mode = 'inline';
+$.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+<% ["summary", "tst_est", "dev_est"].each do |fn| %>
+
+$('.<%= fn %>').editable({   
+  params: function(params) {
+    var data = {};
+    data["<%= fn %>"] = params.value;
+    return data;
+  }
+}); 
+
+<% end %>
+
+$('.status').editable({   
+  source: [   
+              {value: '<%= Task.first.status%>', text: '<%= Task.first.status%>'}
+           ],
+  params: function(params) {
+    var data = {};
+    data["status"] = params.value;
+    return data;
+  }
+}); 
+
+
 </script>
