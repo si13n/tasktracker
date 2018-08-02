@@ -34,9 +34,9 @@
       <td>CR-GENE-43245IS</td>
       <td><a class="comment" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.comment %> </a></td>
       <td>TBD, NREP</td>
-      <td><%= t.priority %></td>
-      <td><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></td>
-      <td><%= User.find(t.dev).email[0,4] unless t.tst.nil? %></td>
+      <td><a class="priority" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.priority %></a></td>
+      <td><a class="tst" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></a></td>
+      <td><a class="dev" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= User.find(t.dev).email[0,4] unless t.dev.nil? %></a></td>
       <td><a class="tst_est" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.tst_est %></a></td>
       <td><a class="dev_est" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.dev_est %></a></td>
       <td><%= t.dev_est.to_i + t.tst_est.to_i %></td>
@@ -69,11 +69,52 @@ $('.<%= fn %>').editable({
 
 $('.status').editable({   
   source: [   
-              {value: '<%= Task.first.status%>', text: '<%= Task.first.status%>'}
+              <% Task.status.each do |st| %>
+                {value: '<%= st %>', text: '<%= st %>'},
+              <% end %>
            ],
   params: function(params) {
     var data = {};
     data["status"] = params.value;
+    return data;
+  }
+}); 
+
+$('.priority').editable({   
+  source: [   
+              <% Task.priority.each do |st| %>
+                {value: '<%= st %>', text: '<%= st %>'},
+              <% end %>
+           ],
+  params: function(params) {
+    var data = {};
+    data["priority"] = params.value;
+    return data;
+  }
+}); 
+
+$('.tst').editable({   
+  source: [   
+              <% User.where(role: 'Tester').each do |st| %>
+                {value: '<%= st.id %>', text: '<%= st.email[0,4] %>'},
+              <% end %>
+           ],
+  params: function(params) {
+    var data = {};
+    data["tst"] = params.value;
+    return data;
+  }
+}); 
+
+$('.dev').editable({   
+  source: [   
+              <% User.where(role: 'Developer').each do |st| %>
+                {value: '<%= st.id %>', text: '<%= st.email[0,4] %>'},
+              <% end %>
+           ],
+  params: function(params) {
+    var data = {};
+    data["dev"] = params.value;
     return data;
   }
 }); 
