@@ -32,7 +32,7 @@
       <td>TMHS-0945</td>
       <td>ISS-GENE-45022IS</td>
       <td>CR-GENE-43245IS</td>
-      <td>Will be fixed somehow</td>
+      <td><a class="comment" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.comment %> </a></td>
       <td>TBD, NREP</td>
       <td><%= t.priority %></td>
       <td><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></td>
@@ -55,7 +55,7 @@ $('table').tablesort();
 $.fn.editable.defaults.mode = 'inline';
 $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
-<% ["summary", "tst_est", "dev_est"].each do |fn| %>
+<% ["summary", "comment", "tst_est", "dev_est"].each do |fn| %>
 
 $('.<%= fn %>').editable({   
   params: function(params) {

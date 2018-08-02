@@ -17,13 +17,24 @@ class Task < ApplicationRecord
             if params[:status]
                 if params[:status].length == 2
                     "status LIKE '%#{params[:status][0]}%' or
-                     status LIKE '%#{params[:status][1]}%'"
+                    status LIKE '%#{params[:status][1]}%'"
                 elsif params[:status].length == 3
-                   "status LIKE '%#{params[:status][0]}%' or
+                    "status LIKE '%#{params[:status][0]}%' or
                     status LIKE '%#{params[:status][1]}%' or
                     status LIKE '%#{params[:status][2]}%'"
+                elsif params[:status].length == 4
+                    "status LIKE '%#{params[:status][0]}%' or
+                    status LIKE '%#{params[:status][1]}%' or
+                    status LIKE '%#{params[:status][2]}%' or
+                    status LIKE '%#{params[:status][3]}%'"
+                elsif params[:status].length == 5
+                    "status LIKE '%#{params[:status][0]}%' or
+                    status LIKE '%#{params[:status][1]}%' or
+                    status LIKE '%#{params[:status][2]}%' or
+                    status LIKE '%#{params[:status][3]}%' or
+                    status LIKE '%#{params[:status][4]}%'"
                 else
-                    "status LIKE '%#{params[:status].first}%' "
+                    "status LIKE '%#{params[:status][0]}%' "
                 end
             end
         ).
