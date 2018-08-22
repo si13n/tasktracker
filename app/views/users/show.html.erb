@@ -37,71 +37,39 @@
 
 <div class="ui comments">
   <h3 class="ui dividing header">Last <%= @user.name != nil ? @user.name : @user.email %>'s Comments:</h3>
-  <div class="comment">
-    <a class="avatar">
-      <% if @user.avatar.attached? %>
-          <%= image_tag(@user.avatar) %>
-            <% else %>
-             <%= image_tag("user_placeholder.png") %>
-              <% end %>
-    </a>
-    <div class="content">
-      <a class="author"><%= @user.email %></a>
-      <div class="metadata">
-        <span class="date">Today at 5:42PM</span>
-              <div class="actions">
-        <a class="reply">Task #0126</a>
-      </div>
-      </div>
-      <div class="text">
-        How artistic!
-      </div>
-
-    </div>
-  </div>
-  <div class="comment">
-    <a class="avatar">
-           <% if @user.avatar.attached? %>
-          <%= image_tag(@user.avatar) %>
-            <% else %>
-             <%= image_tag("user_placeholder.png") %>
-              <% end %>
-    </a>
-    <div class="content">
-      <a class="author"><%= @user.email %></a>
-      <div class="metadata">
-        <span class="date">Yesterday at 12:30AM</span>
-              <div class="actions">
-        <a class="reply">Task #0126</a>
-      </div>
-      </div>
-      <div class="text">
-        <p>This has been very useful for my research. Thanks as well!</p>
-      </div>
-    </div>
-  </div>
-    <div class="comment">
-    <a class="avatar">
-     <% if @user.avatar.attached? %>
-          <%= image_tag(@user.avatar) %>
-            <% else %>
-             <%= image_tag("user_placeholder.png") %>
-              <% end %>
-    </a>
-    <div class="content">
-      <a class="author"><%= @user.email %></a>
-      <div class="metadata">
-        <span class="date">Yesterday at 12:30AM</span>
-              <div class="actions">
-        <a class="reply">Task #0126</a>
-      </div>
-      </div>
-      <div class="text">
-        <p>This has been very useful for my research. Thanks as well!</p>
-      </div>
-    </div>
+  
     
-  </div>
+  <% Comment.where(user_id: @user.id).limit(10).each do |c| %>
+            <div class="comment">
+                <a class="avatar">
+                    <% if @user.avatar.attached? %>
+                        <%= image_tag(@user.avatar) %>
+                    <% else %>
+                        <%= image_tag("user_placeholder.png") %>
+                    <% end %>
+                </a>
+                <div class="content">
+                <a class="author">
+                    <% if @user.name? %>
+                    <%= @user.name %>
+                    <% else %>
+                    <%= @user.email %>
+                    <% end %>
+                </a>
+                <div class="metadata">
+                    <span class="date"><%= time_ago_in_words(c.created_at) %> ago.</span>
+                </div>
+                <div class="text">
+                    <%= link_to c.text, task_path(c.task_id) %>
+                </div>
+                <div class="actions">
+                    <% if c.user_id == current_user.id || User.find(c.user.id).is_admin? %>
+                    <%= link_to "Delete", [c.task, c], method: :delete, class: "reply"%>
+                    <% end %>
+                </div>
+                </div>
+            </div>
+        <% end %>
 
 </div>
 
