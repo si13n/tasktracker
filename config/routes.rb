@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root 'tasks#index'
 
-  resources :tasks
-  resources :users  do
+  resources :tasks do
+    resources :tags
+    resources :comments
+  end
+  resources :users do
     member do
       delete :delete_avatar
     end

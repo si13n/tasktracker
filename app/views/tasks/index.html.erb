@@ -12,13 +12,9 @@
       <th width="100pixels">TMS</th>
       <th width="140pixels">ISSUE</th>
       <th width="140pixels">CR</th>
-      <th width="10%">COMMENT</th>
       <th width="7%">TAGS</th>
       <th>PRIORITY</th>
-      <th>TST</th>
-      <th>DEV</th>
-      <th>TST_EST</th>
-      <th>DEV_EST</th>
+      <th>ASSIGNED</th>
       <th>EST</th>
       <th>STATUS</th>
     </tr>
@@ -26,20 +22,22 @@
   <tbody>
   <% @tasks.each do |t| %>
     <tr>
-      <td><%= link_to t.id.to_s, edit_task_path(t)%></a></td>
+      <td><%= link_to t.id.to_s, task_path(t)%></a></td>
       <td><%= Project.find(t.project).name unless t.project.nil? %></td>
       <td><a class="summary" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.summary %> </a> </td>
       <td>TMHS-0945</td>
       <td>ISS-GENE-45022IS</td>
       <td>CR-GENE-43245IS</td>
-      <td><a class="comment" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.comment %> </a></td>
-      <td>TBD, NREP</td>
+      <td>
+        <% if t.tags %>
+          <% t.tags.each do |tag| %>      
+            <a href=#><%= tag.tag %></a>
+          <% end %>
+        <% end %>
+      </td>
       <td><a class="priority" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.priority %></a></td>
-      <td><a class="tst" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= User.find(t.tst).email[0,4] unless t.tst.nil? %></a></td>
-      <td><a class="dev" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= User.find(t.dev).email[0,4] unless t.dev.nil? %></a></td>
-      <td><a class="tst_est" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.tst_est %></a></td>
-      <td><a class="dev_est" data-type= "text" data-pk= "" data-url= "<%=task_path(t) %>"> <%= t.dev_est %></a></td>
-      <td><%= t.dev_est.to_i + t.tst_est.to_i %></td>
+      <td></td>
+      <td></td>
       <td><a class="status" data-type= "select" data-pk= "" data-url= "<%=task_path(t) %>"><%= t.status %> </a> </td>
     </tr>
     <% end %>
@@ -52,20 +50,16 @@
 <script>
 $('table').tablesort();
 
-$.fn.editable.defaults.mode = 'inline';
 $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
-<% ["summary", "comment", "tst_est", "dev_est"].each do |fn| %>
-
-$('.<%= fn %>').editable({   
+$('.summary').editable({   
   params: function(params) {
     var data = {};
-    data["<%= fn %>"] = params.value;
+    data["summary"] = params.value;
     return data;
   }
 }); 
 
-<% end %>
 
 $('.status').editable({   
   source: [   
@@ -89,32 +83,6 @@ $('.priority').editable({
   params: function(params) {
     var data = {};
     data["priority"] = params.value;
-    return data;
-  }
-}); 
-
-$('.tst').editable({   
-  source: [   
-              <% User.where(role: 'Tester').each do |st| %>
-                {value: '<%= st.id %>', text: '<%= st.email[0,4] %>'},
-              <% end %>
-           ],
-  params: function(params) {
-    var data = {};
-    data["tst"] = params.value;
-    return data;
-  }
-}); 
-
-$('.dev').editable({   
-  source: [   
-              <% User.where(role: 'Developer').each do |st| %>
-                {value: '<%= st.id %>', text: '<%= st.email[0,4] %>'},
-              <% end %>
-           ],
-  params: function(params) {
-    var data = {};
-    data["dev"] = params.value;
     return data;
   }
 }); 

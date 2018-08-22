@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_02_073024) do
+ActiveRecord::Schema.define(version: 2018_08_22_090943) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 2018_08_02_073024) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "text"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "task_id"
+    t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.date "delivery"
@@ -40,14 +50,18 @@ ActiveRecord::Schema.define(version: 2018_08_02_073024) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.text "tag"
+    t.integer "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_tags_on_task_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "summary"
     t.text "description"
     t.string "priority"
-    t.integer "tst"
-    t.integer "dev"
-    t.integer "tst_est"
-    t.integer "dev_est"
     t.integer "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

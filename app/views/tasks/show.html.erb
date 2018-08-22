@@ -1,0 +1,40 @@
+<div class="ui container">
+</p>
+<div class="ui top attached tabular menu">
+  <a class="active item" data-tab="info">
+    Task <%= @task.id %>
+  </a>
+  <a class="item" data-tab="remote">
+    Remote info
+  </a>
+  <a class="item" data-tab="comments">
+    Comments
+  </a>
+  <a class="item" data-tab="attachments">
+    Attachments
+  </a>
+</div>
+
+<div class="ui bottom tab attached segment active" data-tab="info">
+  <%= render 'form'%>
+  <%= render 'tags'%>
+  <%= render 'assigneds'%>
+</div>
+<div class="ui bottom tab attached segment" data-tab="remote">
+  <%= render 'remote'%>
+</div>
+<div class="ui bottom tab attached segment" data-tab="comments">
+  <%= render 'comments'%>
+</div>
+<div class="ui bottom tab attached segment" data-tab="attachments">
+  <%= render 'attachments'%>
+</div>
+
+
+
+
+<script>
+$('.menu .item')
+  .tab()
+;
+</script>

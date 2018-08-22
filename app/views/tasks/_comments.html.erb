@@ -1,0 +1,54 @@
+<!-- Comments -->
+    <div class="six wide column">
+        <div class="ui small comments">
+        <% if @comments.length == 0 %>
+        <div class="ui blue message">
+            Be the first to comment!
+        </div>
+        <% end %>
+        <% @comments.each do |c| %>
+            <div class="comment">
+                <a class="avatar">
+                    <% if User.find(c.user_id).avatar.attached? %>
+                        <%= image_tag(User.find(c.user_id).avatar) %>
+                    <% else %>
+                        <%= image_tag("user_placeholder.png") %>
+                    <% end %>
+                </a>
+                <div class="content">
+                <a class="author">
+                    <% if User.find(c.user_id).name? %>
+                    <%= User.find(c.user_id).name %>
+                    <% else %>
+                    <%= User.find(c.user_id).email %>
+                    <% end %>
+                </a>
+                <div class="metadata">
+                    <span class="date"><%= time_ago_in_words(c.created_at) %> ago.</span>
+                </div>
+                <div class="text">
+                    <%= c.text %>
+                </div>
+                <div class="actions">
+                    <% if c.user_id == current_user.id || User.find(c.user.id).is_admin? %>
+                    <%= link_to "Delete", [c.task, c], method: :delete, class: "reply"%>
+                    <% end %>
+                </div>
+                </div>
+            </div>
+        <% end %>
+
+            </p>
+
+            <%= form_for([@task, @task.comments.build]) do |f| %>
+            <div class="ui reply form">
+                <div class="field">
+                <%= f.text_area :text, placeholder: "Enter comment here..."%>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                </div>           
+                <%= f.submit "Comment", class: "ui blue submit button"%>
+            </div>
+            <% end %>
+        </div>
+    </div>
+<!-- End of Comments -->

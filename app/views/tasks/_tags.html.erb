@@ -1,0 +1,23 @@
+</p>
+<div class="ui grid">
+  <div class="four wide column">
+    <%= form_for([@task, @task.tags.build]) do |f| %>
+    <i class="tags icon"></i>
+    <div class="ui mini input">
+      <%= f.text_field :tag, placeholder: 'Enter a new tag' %>
+    </div>
+    <%= f.submit 'Add', :class => 'ui mini button' %>
+    <% end %>
+  </div>
+  <div class="twelve wide column">
+    <% @task.tags.each do |tag| %>
+    <% next if tag.new_record? %>
+    <div class="ui tag label">
+        <a href=#><%= tag.tag %></a>
+        <%= link_to [tag.task, tag], method: :delete do %>
+        <i class="delete icon"></i>
+        <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
